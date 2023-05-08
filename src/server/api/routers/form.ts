@@ -1,6 +1,6 @@
-import { z } from 'zod'
+import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const formRouter = createTRPCRouter({
   submit: publicProcedure
@@ -15,15 +15,15 @@ export const formRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       return ctx.prisma.formData.create({
         data: {
-          category: JSON.stringify(input.category),
+          category: input.category.join(", "),
           otherCategory: input.otherCategory,
           experience: input.experience,
           comment: input.comment,
         },
-      })
+      });
     }),
 
   getAllFormData: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.formData.findMany()
+    return ctx.prisma.formData.findMany();
   }),
-})
+});
