@@ -7,7 +7,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="max-w-8xl mx-auto px-3 pt-4">
-      {formData && (
+      {formData ? (
         <div className="overflow-x-auto">
           <table className="table w-full">
             {/* head */}
@@ -40,6 +40,10 @@ const Home: NextPage = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      ) : (
+        <div>
+          <h1 className="text-xl">Loading data...</h1>
         </div>
       )}
     </div>

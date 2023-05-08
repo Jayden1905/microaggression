@@ -117,7 +117,7 @@ const Form: NextPage = () => {
           pauseOnHover
           theme="dark"
         />
-        {categories && (
+        {categories ? (
           <>
             <div className="mx-auto mb-10 max-w-4xl px-3 pt-4">
               <h1 className="text-2xl font-semibold text-primary">
@@ -199,6 +199,10 @@ const Form: NextPage = () => {
               </form>
             </div>
           </>
+        ) : (
+          <div className="max-w-8xl mx-auto px-3">
+            <h1 className="text-xl">Loading form...</h1>
+          </div>
         )}
       </main>
     </>
