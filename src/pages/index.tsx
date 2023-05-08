@@ -157,7 +157,7 @@ const Home: NextPage = () => {
                 </div>
                 <button
                   type='submit'
-                  className={`btn-wide btn ${
+                  className={`btn w-full sm:w-[300px] ${
                     onSubmit ? 'loading' : ''
                   } mt-4 text-lg normal-case`}
                 >
