@@ -25,6 +25,8 @@ const Home: NextPage = () => {
     comment: '',
   })
 
+  const [onSubmit, setOnSubmit] = useState<boolean>(false)
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as unknown as string
     if (event.target.checked) {
@@ -51,7 +53,7 @@ const Home: NextPage = () => {
 
   const createForm = api.form.submit.useMutation({
     onSuccess: () => {
-      console.log('form submitted successfully')
+      setOnSubmit(false)
       resetFormData()
       formRef.current?.reset()
     },
@@ -63,6 +65,8 @@ const Home: NextPage = () => {
     createForm.mutate({
       ...formData,
     })
+
+    setOnSubmit(true)
   }
 
   const { data: categories } = api.categories.getCategories.useQuery()
@@ -77,7 +81,7 @@ const Home: NextPage = () => {
       <main>
         {categories && (
           <>
-            <div className='mx-auto max-w-4xl px-3 pt-4'>
+            <div className='mx-auto mb-10 max-w-4xl px-3 pt-4'>
               <h1 className='text-4xl font-semibold text-primary'>
                 Microaggression in Healthcare Examples Database
               </h1>
@@ -153,9 +157,11 @@ const Home: NextPage = () => {
                 </div>
                 <button
                   type='submit'
-                  className='btn-wide btn mt-4 text-lg normal-case'
+                  className={`btn-wide btn ${
+                    onSubmit ? 'loading' : ''
+                  } mt-4 text-lg normal-case`}
                 >
-                  Submit
+                  {onSubmit ? 'Submitting...' : 'Submit'}
                 </button>
               </form>
             </div>
