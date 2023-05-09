@@ -69,8 +69,8 @@ const Form: NextPage = () => {
       resetFormData();
       formRef.current?.reset();
     },
-    onError: () => {
-      toast.error("Error submitting form.", {
+    onError: ({ message }) => {
+      toast.error(message, {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
